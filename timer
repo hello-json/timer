@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+
+import threading
+import time
+
+
+def fun_timer():
+    localtime = time.asctime( time.localtime(time.time()) )
+    printsth = localtime + '\t' + "helloworld"
+    #print(printsth)
+    fo.write(printsth+'\n')
+    global timer
+    timer = threading.Timer(5, fun_timer)  # 每隔5秒执行一次定时器
+    timer.start()
+
+fo = open("log", "w")
+timer = threading.Timer(0.1, fun_timer)  # 0.1秒后第一次执行定时器
+timer.start()
+
+time.sleep(15) # 15秒后停止定时器
+timer.cancel()
+fo.close()
